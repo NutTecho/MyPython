@@ -1,14 +1,21 @@
 import pyodbc
 import serial
 import socket
+import pandas as pd
 from time import sleep
 import paho.mqtt.client as mqtt
-con_string = """driver=odbc Driver 13 for SQL Server;
-				server=127.0.0.1;
-				database = test;
-				username = admin;
-				password = admin;
+con_string = """Driver={SQL Server};
+				Server=127.0.0.1;
+				Database = test;
+				UID = admin;
+				PWD = admin;
 				"""
+def pdtest1():
+	
+	sqlstr = """ select * from test.dbo.xx	"""
+	conn = pyodbc.connect(con_string)
+	df = pd.read_sql(sql = sqlstr,con = conn,index_col = 'id')
+	print(df)
 
 def create_table():
 	sql = """
@@ -58,7 +65,8 @@ def sockettest():
 
 
 if __name__=='__main__':
+	pdtest1()
 	# select_table()
-	serialtest()
+	# serialtest()
 	# testmqtt()
 	# publishmqtt()

@@ -18,8 +18,6 @@ class Application(Frame):
         # self.root.grid_rowconfigure(0, weight=1)
         # self.root.grid_columnconfigure(0, weight=1)
         self.root.geometry("800x400")
-        # self.root.config(background="green")
-        # self.root.Font(family="Arial", size=16, weight="bold", slant="italic")
         setfont = tkFont.Font(family="Arial", size=16, weight="bold", slant="italic")
         self.Frame1 = Frame(self.root,bg = "pink")
         self.Frame2 = Frame(self.root,bg = "yellow")
@@ -71,7 +69,6 @@ class Application(Frame):
         self.textb1.grid(row = 2,column = 0,padx = 5,pady = 5)
 
     def openselect(self,e):
-        # filedialog.askopenfile()
         self.filepath = filedialog.askdirectory()
                 
         # file2 = filedialog.askopenfilename(title = "test",filetype = [('Excel')])
@@ -89,7 +86,6 @@ class Application(Frame):
             for i,r in enumerate(self.arrpath):
                 # self.textb1.insert(END,r + '\n')
                 self.textb1.insert(i,self.filepath+'/'+ r)
-                # self.textb1.insert(END,r + '\n')
 
 
     def delselect(self,e):
@@ -111,9 +107,6 @@ class Application(Frame):
                     copy2(source,des)
         except expression as e:
             print("Error -> {e}")
-
-       
- 
 
 app = Application(Tk())
 app.root.mainloop()
