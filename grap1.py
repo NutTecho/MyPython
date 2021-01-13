@@ -73,26 +73,23 @@ def demo3():
 				"""
 	sqlstr = """ select * from test.dbo.xx	"""
 	conn = pyodbc.connect(con_string)
-	df = pd.read_sql(sql = sqlstr,con = conn,index_col = 'id')
-	figure1 = plt.Figure(figsize=(6,5), dpi=100)
+	df = pd.read_sql(sql = sqlstr,con = conn)
+	figure1 = plt.Figure(figsize=(3,4), dpi=100)
 	ax1 = figure1.add_subplot(111)
 	bar1 = FigureCanvasTkAgg(figure1, root)
-	bar1.get_tk_widget().grid(row = 0,column = 0)
+	bar1.get_tk_widget().grid(row = 0,column = 0,padx = 10,pady = 10)
+	df[['lname','age']].plot(kind = 'bar',legend = True,ax=ax1)
 	df[['fname','money']].plot(kind = 'bar',legend = True,ax=ax1)
-	print(df.iloc[df['age'].values,[0,3]])
+	print(df.iloc[0:])
 
-	tree = ttk.Treeview(root, column=(1,2,3,4,5,6), show='headings')
-	# tree.column("#1", anchor=CENTER)
-	tree.heading("#1", text="ID")
-	# tree.column("#2", anchor=CENTER)
-	tree.heading("#2", text="FNAME")
-	# tree.column("#3", anchor=CENTER)
-	tree.heading("#3", text="LNAME")
-	tree.heading("#4", text="AGE")
-	tree.heading("#5", text="TOY")
-	tree.heading("#6", text="MONEY")
-	tree.grid(row = 0,column = 1)
-	# tree.insert(parent='', index='end', iid=0, text="Label", values=("Hello", "Second Col", "Third Col"))
+	tree = ttk.Treeview(root, column=(0,1,2,3,4,5), show='headings')
+	headlist = ["ID","FNAME","LNAME","AGE","TOY","MONEY"]
+	for r in range(6):
+		tree.column(f"{r}", anchor=CENTER, width = 80)
+		tree.heading(f"{r}", text=headlist[r])
+	tree.grid(row = 0,column = 1,padx = 10,pady = 10)
+	for i in df.values.tolist():
+		tree.insert(parent='', index='end',values=i[0:])
 	# for i,v in enumerate(df):
 	# 	# print(f"{i} {v}")
 	# 	tree.insert('', END, values=df.iloc[i,:].tolist())
