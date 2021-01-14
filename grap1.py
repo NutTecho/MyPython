@@ -74,22 +74,37 @@ def demo3():
 	sqlstr = """ select * from test.dbo.xx	"""
 	conn = pyodbc.connect(con_string)
 	df = pd.read_sql(sql = sqlstr,con = conn)
-	figure1 = plt.Figure(figsize=(3,4), dpi=100)
-	ax1 = figure1.add_subplot(111)
-	bar1 = FigureCanvasTkAgg(figure1, root)
+	# figure1 = plt.Figure(figsize=(3,4), dpi=100)
+	# ax1 = figure1.add_subplot(111)
+	# ax[0] = fig.add_subplot(111)
+	fig,ax = plt.subplots(1,2,figsize=(6,3),sharey=True)
+	# ax.bar(x - width/2,'money',width,label = 'money')
+	x1 = np.arange(len(df['fname']))
+	wx = 0.35
+	bar1 = FigureCanvasTkAgg(fig, root)
 	bar1.get_tk_widget().grid(row = 0,column = 0,padx = 10,pady = 10)
-	df[['lname','age']].plot(kind = 'bar',legend = True,ax=ax1)
-	df[['fname','money']].plot(kind = 'bar',legend = True,ax=ax1)
-	print(df.iloc[0:])
-
+	ax[0].bar(x1-wx/2,df['money'], wx,label = 'money')
+	ax[0].bar(x1+wx/2,df['age'], wx,label = 'age')
+	# df.plot(x1-wx/2,'money',kind = 'bar',legend = True,ax=ax[0],width = wx)
+	# df.plot(x=x + 0.35/2,y='age',kind = 'bar',legend = True,ax=ax[0], width = 0.35)
+	ax[0].set_xticks(x1)
+	ax[0].set_xticklabels(df['fname'])
+	print(df.columns)
+	headlist = df.columns
 	tree = ttk.Treeview(root, column=(0,1,2,3,4,5), show='headings')
-	headlist = ["ID","FNAME","LNAME","AGE","TOY","MONEY"]
-	for r in range(6):
+	# headlist = ["ID","FNAME","LNAME","AGE","TOY","MONEY"]
+	for r in range(len(headlist)):
 		tree.column(f"{r}", anchor=CENTER, width = 80)
 		tree.heading(f"{r}", text=headlist[r])
 	tree.grid(row = 0,column = 1,padx = 10,pady = 10)
 	for i in df.values.tolist():
 		tree.insert(parent='', index='end',values=i[0:])
+
+	def deldata(e):
+		# data = tree.get_children()
+		tree.delete(*tree.get_children())
+		# for i in data:
+		# 	tree.item(i)['values'].remove
 	# for i,v in enumerate(df):
 	# 	# print(f"{i} {v}")
 	# 	tree.insert('', END, values=df.iloc[i,:].tolist())
@@ -98,10 +113,9 @@ def demo3():
 	# lb1 = Label(root,textvariable = result, height = 2,width = 8, bg = "yellow")
 	# lb1.grid(row = 1,column = 0)
 
-	# bt1 = Button(root,text = "enter", width = 20)
-	# bt1.bind('<Button-1>', add1)
-	# bt1.grid(row = 1,column = 1)
-
+	bt1 = Button(root,text = "enter", width = 20)
+	bt1.bind('<Button-1>', deldata)
+	bt1.grid(row = 1,column = 1)
 
 
 	# figure2 = plt.Figure(figsize=(5,4), dpi=100)
@@ -112,7 +126,7 @@ def demo3():
 	# df2.plot(kind='line', legend=True, ax=ax2, color='r',marker='o', fontsize=10)
 	# ax2.set_title('Year Vs. Unemployment Rate')
 
-
+	fig.tight_layout()
 	root.mainloop()
 
 
