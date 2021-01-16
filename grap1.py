@@ -56,6 +56,19 @@ def demo3():
     #      'Unemployment_Rate': [9.8,12,8,7.2,6.9,7,6.5,6.2,5.5,6.3]
     #     }
 	# df2 = DataFrame(data2,columns=['Year','Unemployment_Rate'])	
+	class HoverButton(Button):
+		def __init__(self,master,**kw):
+			Button.__init__(self,master = master,**kw)
+			self.defaultbackground = self['background']
+			self.bind('<Enter>',self.hoveron)
+			self.bind('<Leave>',self.hoveroff)
+
+		def hoveron(self,e):
+			self.defaultbackground = self['activebackground']
+
+		def hoveroff(self,e):
+			self['background'] = self.defaultbackground
+
 
 
 	root = Tk()
@@ -113,7 +126,7 @@ def demo3():
 	# lb1 = Label(root,textvariable = result, height = 2,width = 8, bg = "yellow")
 	# lb1.grid(row = 1,column = 0)
 
-	bt1 = Button(root,text = "enter", width = 20)
+	bt1 = HoverButton(root,text = "enter", width = 20, activebackground = 'red')
 	bt1.bind('<Button-1>', deldata)
 	bt1.grid(row = 1,column = 1)
 
