@@ -4,6 +4,7 @@ from pandas import DataFrame
 from tkinter import *
 from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.animation import FuncAnimation
 import random
 import seaborn as sns
 import sqlite3
@@ -65,12 +66,16 @@ def demo3():
 		def __init__(self,master,**kw):
 			Entry.__init__(self,master = master,**kw)
 			self.bind('<Return>',self.cutting)
+			# self.bind('<Enter>',self.hoveron)
 
 		def cutting(self,e):
 			self.keepdata = e.widget.get()
 			if(len(self.keepdata) > 10):
 				self.delete(0,END)
 				self.insert(END,self.keepdata[0:3])
+
+		# def hoveron(self,e):
+			# self['highlightbackground'] = 'red'
 
 	root = Tk()
 	con_string = """Driver={SQL Server};
@@ -100,11 +105,11 @@ def demo3():
 	# ax[0].set_xticklabels(df['fname'])
 
 	headlist = df.columns
-	tree = ttk.Treeview(root, column=(0,1,2,3,4,5,6,7,8,9,10,11), show='headings')
+	tree = ttk.Treeview(root, column=tuple(np.arange(len(headlist))), show='headings')
 	for r in range(len(headlist)):
 		tree.column(f"{r}", anchor=CENTER, width = 80)
 		tree.heading(f"{r}", text=headlist[r])
-	tree.grid(row = 0,column = 1,padx = 10,pady = 10)
+	tree.grid(row = 1,column = 0,padx = 10,pady = 10)
 	for i in df.values.tolist():
 		tree.insert(parent='', index='end',values=i[0:])
 
@@ -117,8 +122,11 @@ def demo3():
 	bt1.grid(row = 1,column = 1)
 
 	# str1 = StringVar()
-	ct = CutTextbox(root)
+	ct = CutTextbox(root,relief='flat',highlightcolor='red',highlightthickness = 2)
 	ct.grid(row = 2,column = 1)
+
+	tb1 = Text(root,highlightcolor='red',highlightthickness = 2)
+	tb1.grid(row = 3,column = 1)
 
 	fig.tight_layout()
 	root.mainloop()
