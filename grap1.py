@@ -6,6 +6,7 @@ from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 import random
+from itertools import count
 import seaborn as sns
 import sqlite3
 import pyodbc
@@ -86,15 +87,28 @@ def demo3():
 				"""
 	sqlstr = """ select * from test.dbo.xx	"""
 	conn = pyodbc.connect(con_string)
-	url = 'https://github.com/prasertcbs/tutorial/raw/master/mpg.csv'
-	df=pd.read_csv(url)
-	# df = pd.read_sql(sql = sqlstr,con = conn)
+	# url = 'https://github.com/prasertcbs/tutorial/raw/master/mpg.csv'
+	# df=pd.read_csv(url)
+	df = pd.read_sql(sql = sqlstr,con = conn)
+	plt.style.use('seaborn-darkgrid')
 	fig,ax = plt.subplots(1,1,figsize=(6,3),sharey=True)
 	bar1 = FigureCanvasTkAgg(fig, root)
 	bar1.get_tk_widget().grid(row = 0,column = 0,padx = 10,pady = 10)
-	# df.plot(x='fname' ,y =['money','age'],kind = 'bar',legend = True,ax=ax[0],color = ['r','b'])
-	sns.countplot(x ='year',data = df ,hue = 'class',ax=ax)
+	
+	# sns.countplot(x ='year',data = df ,hue = 'class',ax=ax)
 	# sns.barplot(x='fname',y ='age',data = df ,saturation =8,ax=ax[1])
+	# x_val = []
+	# y_val = []
+	# index = count()
+	def animate(i):
+		df = pd.read_sql(sql = sqlstr,con = conn)
+		# x_val.append(next(index))
+		# y_val.append(random.randint(0,5))
+		plt.cla()
+		# plt.plot(x_val,y_val)
+		df.plot(x='fname' ,y =['money','age'],kind = 'bar',legend = True,ax = ax)
+
+	ani = FuncAnimation(fig,animate,interval = 5000)
 
 	# use plt with normal case
 	# x1 = np.arange(len(df['fname']))
@@ -122,12 +136,12 @@ def demo3():
 	bt1.grid(row = 1,column = 1)
 
 	# str1 = StringVar()
-	ct = CutTextbox(root,relief='flat',highlightcolor='red',highlightthickness = 2)
-	ct.grid(row = 2,column = 1)
+	# ct = CutTextbox(root,relief='flat',highlightcolor='red',highlightthickness = 2)
+	# ct.grid(row = 2,column = 1)
 
-	tb1 = Text(root,highlightcolor='red',highlightthickness = 2)
-	tb1.grid(row = 3,column = 1)
-
+	# tb1 = Text(root,highlightcolor='red',highlightthickness = 2)
+	# tb1.grid(row = 3,column = 1)
+	# plt.tight_layout()
 	fig.tight_layout()
 	root.mainloop()
 
