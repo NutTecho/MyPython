@@ -2,6 +2,7 @@ import pyodbc
 import serial
 import socket
 import pandas as pd
+import openpyxl
 from time import sleep
 import paho.mqtt.client as mqtt
 con_string = """Driver={SQL Server};
@@ -16,6 +17,25 @@ def pdtest1():
 	conn = pyodbc.connect(con_string)
 	df = pd.read_sql(sql = sqlstr,con = conn,index_col = 'id')
 	print(df)
+
+def readexcel():
+	excelpath = "test.xlsx"
+	# df = pd.read_excel(excelpath,sheet_name="Sheet1",header=2,index_col='id')
+	# print(df)
+
+	# sheet = pd.ExcelFile(excelpath)
+	# print(sheet.sheet_names)
+	# df = sheet.parse(sheet_name=,header = 3)
+	# print(df)
+	fulldata = {}
+	with pd.ExcelFile(excelpath) as workbook:
+		for sheet in workbook.sheet_names:
+			fulldata[sheet] = workbook.parse(sheet,header=3)
+
+	print(fulldata)
+
+
+
 
 def create_table():
 	sql = """
@@ -65,8 +85,9 @@ def sockettest():
 
 
 if __name__=='__main__':
-	pdtest1()
+	# pdtest1()
 	# select_table()
 	# serialtest()
 	# testmqtt()
 	# publishmqtt()
+	readexcel()
