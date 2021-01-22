@@ -19,20 +19,29 @@ def pdtest1():
 	print(df)
 
 def readexcel():
+
 	excelpath = "test.xlsx"
 	# df = pd.read_excel(excelpath,sheet_name="Sheet1",header=2,index_col='id')
-	# print(df)
+	# df1 = pd.read_excel(excelpath,sheet_name="Sheet2",header=2,index_col='id')
+	# full = pd.concat([df,df1],axis=0)
+	# print(full)
+	# df.to_excel('output.xlsx',sheet_name='Sheet1',index = False)
 
 	# sheet = pd.ExcelFile(excelpath)
 	# print(sheet.sheet_names)
 	# df = sheet.parse(sheet_name=,header = 3)
 	# print(df)
-	fulldata = {}
+	fulldata = []
 	with pd.ExcelFile(excelpath) as workbook:
 		for sheet in workbook.sheet_names:
-			fulldata[sheet] = workbook.parse(sheet,header=3)
-
-	print(fulldata)
+			# fulldata[sheet] = workbook.parse(sheet,header=3)
+			df = pd.read_excel(excelpath,sheet_name=sheet,header = 2)
+			fulldata.append(df)
+	# df = pd.DataFrame(fulldata)
+	comb = pd.concat(fulldata,axis=0)
+	comb.to_excel('output.xlsx',sheet_name='Sheet1',index = False)
+	print(comb)
+	
 
 
 
