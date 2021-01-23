@@ -6,6 +6,7 @@ from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 import random
+import datetime
 from itertools import count
 import seaborn as sns
 import sqlite3
@@ -97,18 +98,22 @@ def demo3():
 	
 	# sns.countplot(x ='year',data = df ,hue = 'class',ax=ax)
 	# sns.barplot(x='fname',y ='age',data = df ,saturation =8,ax=ax[1])
-	# x_val = []
-	# y_val = []
+	x_val = []
+	y_val = []
 	# index = count()
 	def animate(i):
-		df = pd.read_sql(sql = sqlstr,con = conn)
-		# x_val.append(next(index))
-		# y_val.append(random.randint(0,5))
+		# df = pd.read_sql(sql = sqlstr,con = conn)
+		dt = datetime.datetime.now().strftime("%H:%M:%S")
+		x_val.append(dt)
+		y_val.append(random.randint(0,5))
+		if len(x_val) > 10:
+			del x_val[0]
+			del y_val[0]
 		plt.cla()
-		# plt.plot(x_val,y_val)
-		df.plot(x='fname' ,y =['money','age'],kind = 'bar',legend = True,ax = ax)
+		plt.plot(x_val,y_val)
+		# df.plot(x='fname' ,y =['money','age'],kind = 'bar',legend = True,ax = ax)
 
-	ani = FuncAnimation(fig,animate,interval = 5000)
+	ani = FuncAnimation(fig,animate,interval = 1000)
 
 	# use plt with normal case
 	# x1 = np.arange(len(df['fname']))
