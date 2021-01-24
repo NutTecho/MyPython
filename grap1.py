@@ -101,6 +101,24 @@ def demo3():
 	x_val = []
 	y_val = []
 	# index = count()
+	def autolabel(rect):
+		# for r in rect:
+		# 	height = r.get_height()
+		# 	ax.annotate('{}'.format(height),
+		# 					xy=(r.get_x() + r.get_width()/2,height),
+		# 					xytext = (0,3),
+		# 					textcoords = "offset points",
+		# 					ha = "center",va = "center")
+		for r in rect:
+			xdata,ydata = r.get_data()
+			c = len(ydata)-1
+			ax.annotate('{}'.format(ydata[c]),
+					xy=(c,ydata[c]),
+					xytext = (0,3),
+					textcoords = "offset points",
+					ha = "center",va = "center")
+
+
 	def animate(i):
 		# df = pd.read_sql(sql = sqlstr,con = conn)
 		dt = datetime.datetime.now().strftime("%H:%M:%S")
@@ -110,7 +128,8 @@ def demo3():
 			del x_val[0]
 			del y_val[0]
 		plt.cla()
-		plt.plot(x_val,y_val)
+		rect1 = plt.plot(x_val,y_val)
+		autolabel(rect1)
 		# df.plot(x='fname' ,y =['money','age'],kind = 'bar',legend = True,ax = ax)
 
 	ani = FuncAnimation(fig,animate,interval = 1000)
