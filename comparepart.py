@@ -17,25 +17,56 @@ class CutTextbox(Entry):
     # e.widget.get
 
 root = Tk()
+root.geometry("600x600")
 x_list = []
 
 def checkdate(e):
-    row = en.grid_info()['row']
-    print(row)
-    # x_list[0].set("settest")
+    # row = en.grid_info()['row']
+    # print(row)
+    rec = e.widget.get()
+    # print(rec)
+    index = int(e.widget.name)
+    # print(index)
+    tar = partitem[index].get()
+    print(index,rec,tar)
+    if rec == tar:
+        
+        stat[index]["text"] = "OK"
+        idlist[index]["bg"] = "lightgreen"
+        partitem[index]["bg"] = "lightgreen"
+        stat[index]["bg"] = "lightgreen"
+    else:
+        stat[index]["text"] = "NG"
+        idlist[index]["bg"] = "indianred"
+        partitem[index]["bg"] = "indianred"
+        stat[index]["bg"] = "indianred"
+
+        
+            # x_list[0].set("settest")
           
+
+idlist = []
+partitem = []
+stat = []
 
 
 for i in range(11):
-    x_list.insert(i,StringVar())
-    en = Entry(root,textvariable =  x_list[i],relief='flat',highlightcolor='red',highlightthickness = 2)
-    en.bind('<Return>',checkdate)
-    en.grid(row = i,column = 0)
+    
+    idnum = Entry(root,relief='solid', width = 15,borderwidth=1,font = "consolas 20",justify = "center")
+    idnum.name = f"{i}"
+    idnum.bind('<Return>',checkdate)
+    idnum.grid(row = i,column = 0,sticky = "NEWS")
 
-    ct = CutTextbox(root,relief='flat',highlightcolor='red',highlightthickness = 2)
-    ct.grid(row = i,column = 1)
+    partname = Entry(root,relief='solid',width = 15 ,font = "consolas 20",justify = "center")
+    partname.name =f"{i}"
+    partname.grid(row = i,column = 1,sticky = "NEWS")
 
-    st = Entry(root,relief='flat',highlightcolor='red',highlightthickness = 2)
-    st.grid(row = i,column = 2)
+    status = Label(root,relief='solid',width = 5,borderwidth=1 ,font = "consolas 20")
+    status.name = f"{i}"
+    status.grid(row = i,column = 2,sticky = "NEWS")
+
+    idlist.append(idnum)
+    partitem.append(partname)
+    stat.append(status)
 
 root.mainloop()
