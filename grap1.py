@@ -36,7 +36,7 @@ def demo2():
 				UID = client1;
 				PWD = nutert0405;
 				"""
-	sql = """ SELECT * FROM test.dbo.xx	"""
+	sql = """ SELECT * FROM test.dbo.pcbtest	"""
 	try:
 		with pyodbc.connect(con_string) as con:
 			c1 = con.cursor()
@@ -174,8 +174,8 @@ def demo3():
 if __name__=='__main__':
 	# in1 = int(input("Age :"))
 	# demo1(in1)
-	# demo2()
-	demo3()
+	demo2()
+	# demo3()
 	
 	
 

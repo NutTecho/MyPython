@@ -12,10 +12,10 @@ con_string = """Driver={SQL Server};
 				PWD = admin;
 				"""
 def pdtest1():
-	
-	sqlstr = """ select * from test.dbo.xx	"""
+	model = "XXX"
+	sqlstr = f""" select * from test.dbo.pcbtest	where model = '{model}'"""
 	conn = pyodbc.connect(con_string)
-	df = pd.read_sql(sql = sqlstr,con = conn,index_col = 'id')
+	df = pd.read_sql(sql = sqlstr,con = conn)
 	print(df)
 
 def readexcel():
@@ -94,9 +94,9 @@ def sockettest():
 
 
 if __name__=='__main__':
-	# pdtest1()
+	pdtest1()
 	# select_table()
 	# serialtest()
 	# testmqtt()
 	# publishmqtt()
-	readexcel()
+	# readexcel()
