@@ -12,6 +12,8 @@ import seaborn as sns
 import sqlite3
 import pyodbc
 import numpy as np
+from time import sleep
+import serial
 
 def demo1(a):
 	try:
@@ -50,35 +52,6 @@ def demo2():
 		# con.close()
 	
 def demo3():
-
-	class HoverButton(Button):
-		def __init__(self,master,**kw):
-			Button.__init__(self,master = master,**kw)
-			self.defaultbackground = self['background']
-			self.bind('<Enter>',self.hoveron)
-			self.bind('<Leave>',self.hoveroff)
-
-		def hoveron(self,e):
-			self['background'] = self['activebackground']
-
-		def hoveroff(self,e):
-			self['background'] = self.defaultbackground
-
-	class CutTextbox(Entry):
-		def __init__(self,master,**kw):
-			Entry.__init__(self,master = master,**kw)
-			self.bind('<Return>',self.cutting)
-			# self.bind('<Enter>',self.hoveron)
-
-		def cutting(self,e):
-			self.keepdata = e.widget.get()
-			if(len(self.keepdata) > 10):
-				self.delete(0,END)
-				self.insert(END,self.keepdata[0:3])
-
-		# def hoveron(self,e):
-			# self['highlightbackground'] = 'red'
-
 	root = Tk()
 	con_string = """Driver={SQL Server};
 				Server=127.0.0.1;
@@ -118,12 +91,19 @@ def demo3():
 					textcoords = "offset points",
 					ha = "center",va = "center")
 
+	def serialget():
+		ser = serial.Serial(port='COM4',baudrate=9600,bytesize=8,parity='N',stopbits=1)
+		a = ser.readline()
+		print(a)
+		sleep(1)
+		return int(a)
 
+		
 	def animate(i):
 		# df = pd.read_sql(sql = sqlstr,con = conn)
 		dt = datetime.datetime.now().strftime("%H:%M:%S")
 		x_val.append(dt)
-		y_val.append(random.randint(0,5))
+		y_val.append(serialget())
 		if len(x_val) > 10:
 			del x_val[0]
 			del y_val[0]
@@ -155,10 +135,6 @@ def demo3():
 		tree.delete(*tree.get_children())
 
 
-	bt1 = HoverButton(root,text = "enter", width = 20, activebackground = 'red')
-	bt1.bind('<Button-1>', deldata)
-	bt1.grid(row = 1,column = 1)
-
 	# str1 = StringVar()
 	# ct = CutTextbox(root,relief='flat',highlightcolor='red',highlightthickness = 2)
 	# ct.grid(row = 2,column = 1)
@@ -174,8 +150,8 @@ def demo3():
 if __name__=='__main__':
 	# in1 = int(input("Age :"))
 	# demo1(in1)
-	demo2()
-	# demo3()
+	# demo2()
+	demo3()
 	
 	
 

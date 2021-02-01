@@ -68,13 +68,14 @@ def select_table():
 
 def serialtest():
 	ser = serial.Serial(port='COM4',baudrate=9600,bytesize=8,parity='N',stopbits=1)
-	print(ser)
+	print(ser.readline())
+	# print(ser)
 	# ser.open()
-	print(ser.is_open)
-	ser.write(b"open reading")
+	# print(ser.is_open)
+	# ser.write(b"open reading")
 	while(True):
-		a = ser.readline();
-		print(a)
+		a = ser.readline()
+		print(int(a))
 		sleep(1)
 	# ser.close()
 
@@ -94,9 +95,9 @@ def sockettest():
 
 
 if __name__=='__main__':
-	pdtest1()
+	# pdtest1()
 	# select_table()
-	# serialtest()
+	serialtest()
 	# testmqtt()
 	# publishmqtt()
 	# readexcel()
