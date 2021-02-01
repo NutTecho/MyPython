@@ -96,6 +96,13 @@ style.configure("TNotebook.Tab",font = "consolas 15")
 tab_parent = ttk.Notebook(root)
 tab1 = ttk.Frame(root)
 tab2 = ttk.Frame(root)
+
+left_frame = ttk.Frame(tab1)
+left_frame.pack(expand = 1,fill = BOTH)
+
+right_frame = ttk.Frame(tab1)
+right_frame.pack(expand = 1,fill = BOTH)
+
 tab_parent.add(tab1,text = "MODEL CHANGE")
 tab_parent.add(tab2,text = "SERIES CHANGE")
 tab_parent.pack(expand = 1,fill = BOTH)
@@ -105,32 +112,32 @@ barq = []
 partitem = []
 stat = []
 
-bt1 = Button(tab1,text = "CLEAR ALL",font = "consolas 20")
+bt1 = Button(left_frame,text = "CLEAR ALL",font = "consolas 20")
 bt1.bind('<Button-1>',clearall)
 bt1.grid(row = 0 , column = 1)
 
 getmodel = StringVar()
-tb1 = Entry(tab1,textvariable = getmodel,relief='solid',width = 15,font = "consolas 20")
+tb1 = Entry(left_frame,textvariable = getmodel,relief='solid',width = 10,font = "consolas 20")
 tb1.bind('<Return>',getdatabase)
 tb1.grid(row = 0 , column = 2)
 
 
 for i in range(11):
     
-    zid = Label(tab1,relief='solid',width = 3,borderwidth=1,font = "consolas 20")
+    zid = Label(left_frame,relief='solid',width = 3,borderwidth=1,font = "consolas 20")
     zid.name = f"{i}"
     zid.grid(row = i+1,column = 0,sticky = "NEWS")
     
-    partname = Label(tab1,relief='solid' ,width = 10,borderwidth=1,font = "consolas 20")
+    partname = Label(left_frame,relief='solid' ,width = 10,borderwidth=1,font = "consolas 20")
     partname.name = f"{i}"
     partname.grid(row = i+1,column = 1,sticky = "NEWS")
 
-    barcode = Entry(tab1,relief='solid',width = 10 ,font = "consolas 20",justify = "center")
+    barcode = Entry(left_frame,relief='solid',width = 10 ,borderwidth=1,font = "consolas 20",justify = "center")
     barcode.name =f"{i}"
     barcode.bind('<Return>',checkdata)
     barcode.grid(row = i+1,column = 2,sticky = "NEWS")
 
-    status = Label(tab1,relief='solid',width = 5,borderwidth=1 ,font = "consolas 20")
+    status = Label(left_frame,relief='solid',width = 5,borderwidth=1 ,font = "consolas 20")
     status.name = f"{i}"
     status.grid(row = i+1,column = 3,sticky = "NEWS")
 
