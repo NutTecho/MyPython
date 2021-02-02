@@ -2,10 +2,14 @@ from opcua import Server
 from random import  randint
 import datetime
 import time
+import sys
+
+sys.path.insert(0,"..")
 server = Server()
-url = "opc.tcp://127.0.0.1:102"
+url = "opc.tcp://localhost0.0.0.0:4840"
 server.set_endpoint(url)
 
+# uri = "http://examples.freeopcua.github.io"
 name = "OPC_SIMULATION_SERVER"
 addspace = server.register_namespace(name)
 node = server.get_objects_node()
