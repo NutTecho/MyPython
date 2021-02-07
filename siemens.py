@@ -36,7 +36,7 @@ else:
 
 # cpu = plc.get_cpu_info()
 # print(cpu)
-x = ReadMemory(plc,10,0,S7WLWord)
+x = ReadMemory(plc,200,0,S7WLWord)
 print(x)
-WriteMemory(plc,20,0,S7WLWord,245)
+WriteMemory(plc,300,0,S7WLWord,245)
 
