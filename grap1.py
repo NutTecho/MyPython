@@ -64,8 +64,9 @@ def demo3():
 	# url = 'https://github.com/prasertcbs/tutorial/raw/master/mpg.csv'
 	# df=pd.read_csv(url)
 	df = pd.read_sql(sql = sqlstr,con = conn)
-	plt.style.use('seaborn-darkgrid')
-	fig,ax = plt.subplots(1,1,figsize=(6,3),sharey=True)
+	# plt.style.use('seaborn-darkgrid')
+	plt.style.use('fivethirtyeight')
+	fig,ax = plt.subplots(1,1,figsize=(18,8),sharey=True,dpi = 50)
 	bar1 = FigureCanvasTkAgg(fig, root)
 	bar1.get_tk_widget().grid(row = 0,column = 0,padx = 10,pady = 10)
 	
@@ -73,7 +74,8 @@ def demo3():
 	# sns.barplot(x='fname',y ='age',data = df ,saturation =8,ax=ax[1])
 	x_val = []
 	y_val = []
-	# index = count()
+	z_val = []
+	index = count()
 	def autolabel(rect):
 		# for r in rect:
 		# 	height = r.get_height()
@@ -81,35 +83,47 @@ def demo3():
 		# 					xy=(r.get_x() + r.get_width()/2,height),
 		# 					xytext = (0,3),
 		# 					textcoords = "offset points",
-		# 					ha = "center",va = "center")
+		# 	
+		# 				ha = "center",va = "center")
 		for r in rect:
 			xdata,ydata = r.get_data()
 			c = len(ydata)-1
-			ax.annotate('{}'.format(ydata[c]),
-					xy=(c,ydata[c]),
+			for i,d in enumerate(ydata):
+				ax.annotate('{}'.format(d),
+					xy=(i,d),
 					xytext = (0,3),
 					textcoords = "offset points",
 					ha = "center",va = "center")
 
 	def serialget():
 		ser = serial.Serial(port='COM4',baudrate=9600,bytesize=8,parity='N',stopbits=1)
+		# ser.open()
 		a = ser.readline()
+		ser.close()
 		print(a)
-		sleep(1)
+		# sleep(1)
 		return int(a)
 
 		
 	def animate(i):
 		# df = pd.read_sql(sql = sqlstr,con = conn)
 		dt = datetime.datetime.now().strftime("%H:%M:%S")
+		# srg = serialget()
 		x_val.append(dt)
-		y_val.append(serialget())
-		if len(x_val) > 10:
+		y_val.append(random.randint(10,40))
+		z_val.append(random.randint(20,50))
+		if len(x_val) > 20:
 			del x_val[0]
 			del y_val[0]
-		plt.cla()
-		rect1 = plt.plot(x_val,y_val)
+			del z_val[0]
+		ax.cla()
+		ax.set_ylim(0,60)
+		ax.set_yticks(np.arange(0,65,2.5))
+		rect1 = ax.plot(x_val,y_val,label = 'chanel1')
+		rect2 = ax.plot(x_val,z_val,label = 'chanel2')
+		ax.legend(loc = 'upper right')
 		autolabel(rect1)
+		autolabel(rect2)
 		# df.plot(x='fname' ,y =['money','age'],kind = 'bar',legend = True,ax = ax)
 
 	ani = FuncAnimation(fig,animate,interval = 1000)
