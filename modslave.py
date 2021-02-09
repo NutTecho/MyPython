@@ -46,6 +46,21 @@ def WriteCoil(client,address,count,value):
     x = client.write_coils(address,[status]*count,unit=1)
     # print(x)
 
+def WriteString(client,address,count,value):
+    client.write_registers(address,[0]*count,unit=1)
+    if len(value)%2 > 0:
+        value = value + " "
+    c = len(value)//2
+    for i in range(c):
+        y = value[0 + (2*i):2 + (2*i)]
+        print(y)
+        q = [ hex(ord(r))[2:4] for r in y]
+        print(q)
+        k = int(q[0]+q[1],16)
+        client.write_registers(address+i,k,unit=1)
+
+
+
 
 client = ModbusTcpClient(host='127.0.0.1',port=502)
 print(client.connect())
@@ -53,6 +68,7 @@ print(client.connect())
 # ReadData(client,1,8)
 # ReadCoil(client,0,8)
 # WriteCoil(client,0,8,"OFF")
+WriteString(client,0,8,"cat")
 
 
 
