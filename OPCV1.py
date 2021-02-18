@@ -24,6 +24,7 @@ def detect(img, faceCascade, eyeCascade):
 
 # cap = cv2.VideoCapture('rtsp://192.168.137.51:8080/h264_pcm.sdp')
 cap = cv2.VideoCapture(0)
+
 while (True):
     ret, frame = cap.read()
     frame = detect(frame, faceCascade, eyeCascade)
