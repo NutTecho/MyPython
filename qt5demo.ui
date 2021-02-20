@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
-    <height>507</height>
+    <width>592</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,13 +34,21 @@ background-color:rgb(45, 45, 45)
 {
 	font: 14pt &quot;MS Shell Dlg 2&quot;;
 	height : 30px
-}</string>
+}
+#tableWidget
+{
+	
+	font: 14pt &quot;Sarabun&quot;;
+	background-color: rgb(255, 255, 127);
+}
+
+</string>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>210</y>
+     <x>160</x>
+     <y>30</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -56,9 +64,9 @@ font: 20pt &quot;Segoe UI&quot;;</string>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>30</x>
      <y>30</y>
-     <width>261</width>
+     <width>101</width>
      <height>41</height>
     </rect>
    </property>
@@ -73,9 +81,9 @@ background-color:rgb(112, 112, 112)</string>
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>30</x>
      <y>90</y>
-     <width>261</width>
+     <width>101</width>
      <height>41</height>
     </rect>
    </property>
@@ -90,9 +98,9 @@ background-color:rgb(112, 112, 112)</string>
   <widget class="QLineEdit" name="lineEdit_3">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>30</x>
      <y>150</y>
-     <width>261</width>
+     <width>101</width>
      <height>41</height>
     </rect>
    </property>
@@ -107,8 +115,8 @@ background-color:rgb(112, 112, 112)</string>
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>300</y>
+     <x>160</x>
+     <y>100</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -130,8 +138,8 @@ background-color:rgb(112, 112, 112)</string>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>370</y>
+     <x>160</x>
+     <y>150</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -147,12 +155,54 @@ font: 20pt &quot;Segoe UI&quot;;</string>
   <widget class="QDateTimeEdit" name="dateTimeEdit">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>300</y>
+     <x>360</x>
+     <y>50</y>
      <width>194</width>
      <height>31</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>230</y>
+     <width>541</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <attribute name="horizontalHeaderVisible">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderHighlightSections">
+    <bool>true</bool>
+   </attribute>
+   <column>
+    <property name="text">
+     <string>id</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>age</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>toy</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

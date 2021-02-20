@@ -164,8 +164,8 @@ def demo3():
 if __name__=='__main__':
 	# in1 = int(input("Age :"))
 	# demo1(in1)
-	# demo2()
-	demo3()
+	demo2()
+	# demo3()
 	
 	
 
