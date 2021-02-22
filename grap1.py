@@ -14,6 +14,7 @@ import pyodbc
 import numpy as np
 from time import sleep
 import serial
+import struct
 
 def demo1(a):
 	try:
@@ -70,6 +71,7 @@ def demo3():
 	bar1 = FigureCanvasTkAgg(fig, root)
 	bar1.get_tk_widget().grid(row = 0,column = 0,padx = 10,pady = 10)
 	
+	ser = serial.Serial(port='COM4',baudrate=9600,bytesize=8,parity='N',stopbits=1)
 	# sns.countplot(x ='year',data = df ,hue = 'class',ax=ax)
 	# sns.barplot(x='fname',y ='age',data = df ,saturation =8,ax=ax[1])
 	x_val = []
@@ -95,32 +97,22 @@ def demo3():
 					textcoords = "offset points",
 					ha = "center",va = "center")
 
-	def serialget():
-		ser = serial.Serial(port='COM4',baudrate=9600,bytesize=8,parity='N',stopbits=1)
-		# ser.open()
-		a = ser.readline()
-		ser.close()
-		print(a)
-		# sleep(1)
-		return int(a)
-
-		
 	def animate(i):
 		# df = pd.read_sql(sql = sqlstr,con = conn)
 		dt = datetime.datetime.now().strftime("%H:%M:%S")
-		# srg = serialget()
+		srg = int(ser.readline())
 		x_val.append(dt)
-		y_val.append(random.randint(10,40))
-		z_val.append(random.randint(20,50))
+		y_val.append(srg)
+		z_val.append(random.randint(0,20))
 		if len(x_val) > 20:
 			del x_val[0]
 			del y_val[0]
 			del z_val[0]
 		ax.cla()
-		ax.set_ylim(0,60)
-		ax.set_yticks(np.arange(0,65,2.5))
-		rect1 = ax.plot(x_val,y_val,label = 'chanel1')
-		rect2 = ax.plot(x_val,z_val,label = 'chanel2')
+		ax.set_ylim(0,20)
+		ax.set_yticks(np.arange(0,25,2.5))
+		rect1 = ax.plot(x_val,y_val,label = 'serial')
+		rect2 = ax.plot(x_val,z_val,label = 'random')
 		ax.legend(loc = 'upper right')
 		autolabel(rect1)
 		autolabel(rect2)
@@ -164,8 +156,8 @@ def demo3():
 if __name__=='__main__':
 	# in1 = int(input("Age :"))
 	# demo1(in1)
-	demo2()
-	# demo3()
+	# demo2()
+	demo3()
 	
 	
 

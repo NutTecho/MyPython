@@ -19,6 +19,8 @@ class AppDemo(QWidget):
         self.tableWidget.setColumnWidth(2,50)
         self.tableWidget.setColumnWidth(3,100)
         self.getdb()
+        self.Slider1.valueChanged['int'].connect(self.scrolllb.setNum)
+        self.Slider1.valueChanged['int'].connect(self.countdata)
 
     def printdata(self):
         a = int(self.lineEdit.text())
@@ -69,7 +71,9 @@ class AppDemo(QWidget):
         except Exception as e:
             print('Error -> {}'.format(e))
 
-    
+    def countdata(self,value):
+        print(value)
+
        
 
 if __name__ == '__main__':

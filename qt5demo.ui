@@ -13,6 +13,9 @@
     <height>537</height>
    </rect>
   </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::CustomContextMenu</enum>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -167,7 +170,7 @@ font: 20pt &quot;Segoe UI&quot;;</string>
     <rect>
      <x>30</x>
      <y>230</y>
-     <width>541</width>
+     <width>421</width>
      <height>281</height>
     </rect>
    </property>
@@ -187,22 +190,128 @@ font: 20pt &quot;Segoe UI&quot;;</string>
     <property name="text">
      <string>id</string>
     </property>
+    <property name="font">
+     <font>
+      <family>Sarabun</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="background">
+     <color>
+      <red>255</red>
+      <green>170</green>
+      <blue>0</blue>
+     </color>
+    </property>
+    <property name="foreground">
+     <brush brushstyle="SolidPattern">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
    </column>
    <column>
     <property name="text">
      <string>name</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sarabun</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="background">
+     <color>
+      <red>255</red>
+      <green>170</green>
+      <blue>0</blue>
+     </color>
     </property>
    </column>
    <column>
     <property name="text">
      <string>age</string>
     </property>
+    <property name="font">
+     <font>
+      <family>Sarabun</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
    </column>
    <column>
     <property name="text">
      <string>toy</string>
     </property>
+    <property name="font">
+     <font>
+      <family>Sarabun</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
    </column>
+  </widget>
+  <widget class="QSlider" name="Slider1">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>120</y>
+     <width>22</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>1</number>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>true</bool>
+   </property>
+   <property name="invertedControls">
+    <bool>false</bool>
+   </property>
+   <property name="tickPosition">
+    <enum>QSlider::TicksAbove</enum>
+   </property>
+   <property name="tickInterval">
+    <number>10</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="scrolllb">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>140</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 16pt &quot;Sarabun&quot;;
+background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
   </widget>
  </widget>
  <resources/>
