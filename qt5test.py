@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication , QWidget ,QMessageBox
 from PyQt5 import uic,QtWidgets
+from PyQt5.QtCore import Qt
 from datetime import datetime
 import pandas as pd
 import pyodbc
@@ -47,6 +48,13 @@ class AppDemo(QWidget):
         index = self.comboBox.findText(data)
         print(index)
         print(data)
+        if index == 0:
+            self.scrolllb.setStyleSheet("background-color: rgb(255, 0, 0)")
+        elif index ==1:
+            self.scrolllb.setStyleSheet("background-color: rgb(125, 255, 0)")
+        else:
+            self.scrolllb.setStyleSheet("background-color: rgb(125, 125, 255)")
+
     
     def getdb(self):
         con_string = """Driver={SQL Server};

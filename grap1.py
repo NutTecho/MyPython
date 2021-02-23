@@ -14,7 +14,6 @@ import pyodbc
 import numpy as np
 from time import sleep
 import serial
-import struct
 
 def demo1(a):
 	try:
