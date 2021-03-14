@@ -1,7 +1,8 @@
 import pymcprotocol
+import struct
 
 #If you use Q series PLC
-pymc3e = pymcprotocol.Type3E()
+# pymc3e = pymcprotocol.Type3E()
 #if you use L series PLC,
 # pymc3e = pymcprotocol.Type3E(plctype="L")
 #if you use QnA series PLC,
@@ -15,13 +16,13 @@ pymc3e = pymcprotocol.Type3E()
 # pymc4e = pymcprotocol.Type4E()
 
 #If you use ascii byte communication, (Default is "binary")
-pymc3e.setaccessopt(commtype="ascii")
-pymc3e.connect("192.168.3.39", 2000)
+# pymc3e.setaccessopt(commtype="binary")
+# pymc3e.connect("192.168.3.39", 2000)
 
 
 #======= Send command================
 #read from D100 to D110
-wordunits_values = pymc3e.batchread_wordunits(headdevice="D100", readsize=10)
+# wordunits_values = pymc3e.batchread_wordunits(headdevice="D100", readsize=10)
 
 #read from X10 to X20
 # bitunits_values = pymc3e.batchread_bitunits(headdevice="X10", readsize=10)
@@ -61,7 +62,7 @@ wordunits_values = pymc3e.batchread_wordunits(headdevice="D100", readsize=10)
 # pymc3e.remote_reset()
 
 #read PLC type
-cpu_type, cpu_code = pymc3e.read_cputype()
+# cpu_type, cpu_code = pymc3e.read_cputype()
 
 #Unlock PLC,
 #If you set PLC to locked, you need to unlkock to remote operation
@@ -74,5 +75,13 @@ cpu_type, cpu_code = pymc3e.read_cputype()
 #Lock PLC
 # pymc3e.remote_lock(password="1234")
 # pymc3e.remote_lock(request_input=True)
-print(wordunits_values)
-print(cpu_type,cpu_code)
+model_name = ""
+wordunits_values = [22084,22084]
+# model = (struct.pack('H',wordunits_values)).decode("UTF-8")
+# model = list(map(lambda x : (struct.pack('H',x)).decode("UTF-8")  , wordunits_values))
+model = [(struct.pack('H',x)).decode("UTF-8") for x in wordunits_values]
+for r in model :
+    model_name += r
+
+print(model_name)
+# print(cpu_type,cpu_code)

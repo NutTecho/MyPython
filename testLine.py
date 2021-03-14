@@ -28,7 +28,7 @@ class LINE:
 
 
 # a = LINE(token).sendtext("hello")
-b = LINE(token).sendpicture("myimage","https://www.mystudy.icu/wp-content/uploads/2019/12/365073.jpg")
-# c = LINE(token).sendsticker("test sendata",2,1)
+# b = LINE(token).sendpicture("myimage","https://www.mystudy.icu/wp-content/uploads/2019/12/365073.jpg")
+c = LINE(token).sendsticker("test sendata",19,2)
 #  a.sendtext("hello")
-print(b)       
+print(c)       
