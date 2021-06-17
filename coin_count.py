@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 while (True):
     ref,frame = cap.read()
