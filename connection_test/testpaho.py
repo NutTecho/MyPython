@@ -1,6 +1,5 @@
 import paho.mqtt.client as mqtt
 import time
-import snap7
 import struct
 
 # The callback for when the client receives a CONNACK response from the server.
