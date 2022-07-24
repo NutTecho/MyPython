@@ -1,0 +1,48 @@
+<MyGrid>
+    input1 : input1
+    input2 : input2
+    result : result
+    btn : btn
+
+
+    GridLayout:
+        cols : 1
+        size : root.width,root.height
+
+        GridLayout:
+            cols : 2
+            rows : 3
+
+            Label : 
+                text : "Input data1"
+                font_size :"20sp"
+
+            TextInput :
+                id : input1
+                multiline : False
+                font_size :"20sp"
+
+            Label :
+                text: "Input data2"
+                font_size :"20sp"
+
+            TextInput :
+                id : input2
+                multiline : False
+                font_size :"20sp"
+            
+            Label :
+                text: "Result"
+                font_size :"20sp"
+
+            Label :
+                id : result
+                font_size :"20sp"
+
+
+        
+        Button : 
+            id : btn
+            text : "submit"
+            on_press : root.caldata()
+

@@ -2,7 +2,7 @@
     "jupyter.jupyterServerType": "local",
     "python.pythonPath": "C:\\Python\\Python37\\python.exe",
     "python.jediEnabled": false,
-    "python.languageServer":"Microsoft",
+    "python.languageServer":"Default",
     "editor.tabCompletion": "on",
     "editor.snippetSuggestions": "top",
     "editor.fontFamily": "Consolas, 'Courier New', monospace",

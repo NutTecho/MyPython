@@ -1,0 +1,106 @@
+WindowManager:
+    MainPage:
+    SecondPage:
+
+<MainPage>
+    name : "main"
+
+    input1 : input1
+    input2 : input2
+    result : result
+    btnnext : btnnext
+    btnsum : btnsum
+
+    FloatLayout:
+        cols : 1
+
+        FloatLayout:
+            size: root.width,root.height/2
+
+            Label : 
+                text : "Input data1"
+                pos_hint: {"x" : 0 , "top" :  0.8}
+                size_hint : 0.5,0.1
+                font_size : (root.width ** 2 + root.height **2) /12 **4
+                
+
+            TextInput :
+                id : input1
+                pos_hint: {"x" : 0.5 , "top" : 0.8}
+                size_hint : 0.4,0.1
+                font_size : (root.width ** 2 + root.height **2) /12 **4
+                multiline : False
+
+            Label :
+                text: "Input data2"
+                pos_hint: {"x" : 0 , "top" : 0.8-0.13}
+                size_hint : 0.5,0.1
+                font_size : (root.width ** 2 + root.height **2) /12 **4
+ 
+            TextInput :
+                id : input2
+                pos_hint: {"x" : 0.5 , "top" : 0.8-0.13}
+                size_hint : 0.4,0.1
+                font_size : (root.width ** 2 + root.height **2) /12 **4
+                multiline : False
+    
+            
+            Label :
+                text: "Result"
+                pos_hint: {"x" : 0 , "y" : 0.4}
+                size_hint : 0.5,0.1
+                font_size : (root.width ** 2 + root.height **2) /12 **4
+          
+
+            Label :
+                id : result
+                pos_hint: {"x" : 0.5 , "y" :0.4}
+                size_hint : 0.4,0.1
+                background_color: (182/255, 66/255, 245/255, 1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                color: (0,1,0,1)
+                bold: True
+                italic: True
+                outline_color: (0,0,1)
+                outline_width: 10
+                font_size : (root.width ** 2 + root.height **2) /12 **4
+       
+
+        Button:
+            id : btnsum
+            pos_hint: {"x" : 0.3 , "y" : 0.25}
+            size_hint : 0.4,0.1
+            font_size : (root.width ** 2 + root.height **2) /12 **4
+            text : "submit"
+            on_release : root.caldata()
+           
+           
+        Button:
+            id : btnnext
+            pos_hint: {"x" : 0.3 , "y" : 0.1}
+            size_hint : 0.4,0.12
+            font_size : (root.width ** 2 + root.height **2) /12 **4
+            text : "next page"
+            on_release : 
+                app.root.current = "second"
+                root.manager.transition.direction = 'left'
+
+<SecondPage>
+    name : "second"
+
+    GridLayout:
+        cols : 1
+
+        Label:
+            text: "this is second page"
+        
+        Button:
+            text : "submit"
+            on_release : 
+                app.root.current = "main"
+                root.manager.transition.direction = 'right'

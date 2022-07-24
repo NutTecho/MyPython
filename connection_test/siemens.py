@@ -1,5 +1,5 @@
-import snap7.client as c
-from snap7.snap7types import *
+import snap7
+from snap7.types import *
 from snap7.util import *
 from datetime import datetime
 import struct
@@ -88,13 +88,26 @@ def WriteDB(plc,dbnum,byte,bit,datatype,value):
     plc.write_area(areas['DB'],dbnum,byte,result)
     print("write sucsess")
 
-plc = c.Client()
-plc.connect('192.168.137.1',0,1,102)  
+plc = snap7.client.Client()
+plc.connect("127.0.0.1",0,1,102)  
 if plc.get_connected():
     print("connect sucsess")
 else:
     print("connect fail")
 
+# buffer = plc.db_get(2)
+# print(buffer)
+block_info = plc.get_cpu_state()
+print(block_info)
+
+# dt = plc.get_plc_datetime()()
+# print(dt)
+
+readx = plc.db_read(2,0,6)
+print(bytes(readx))
+print(int.from_bytes(bytes(readx),"big"))
+print(struct.unpack('h'*3,bytes(readx)))
+print(readx.decode())
 # cpu = plc.get_cpu_info()
 # print(cpu)
 # print(S7WLReal)
@@ -103,16 +116,16 @@ else:
 # q = struct.unpack('!L', x)[0]
 # print(q)
 
-# x = ReadDB(plc,1,18,0,S7WLWord)
+# x = ReadDB(plc,2,0,0,S7WLWord)
 # print(x)
 # for i in range(6):
 #     x = ReadDB(plc,1,22 + i,0,S7WLWord)
 #     print(x)
 
-x = ReadDB(plc,1,27,0,S7WLByte)
-print(x)
-print(struct.unpack('BB',x))
-print(get_int(x,0))
+# x = ReadDB(plc,1,27,0,S7WLByte)
+# print(x)
+# print(struct.unpack('BB',x))
+# print(get_int(x,0))
 # print(struct.unpack('h',x)[0])
 # arr = bytearray([13,0])
 # print(arr)

@@ -1,10 +1,22 @@
 from opcua import Client
-from opcua import ua
 import  time
 
-url = "opc.tcp://localhost:4840"
+url = "opc.tcp://localhost:4841"
 client = Client(url)
-client.connect
+client.connect()
+client.load_type_definitions()
+
+root = client.get_root_node()
+print("Root node is: ", root)
+objects = client.get_objects_node()
+print("Objects node is: ", objects)
+
+uri = "http://examples.freeopcua.github.io"
+idx = client.get_namespace_index(uri)
+
+myvar = root.get_child(["0:Objects", "{}:MyObject".format(idx), "{}:MyVariable".format(idx)])
+obj = root.get_child(["0:Objects", "{}:MyObject".format(idx)])
+print("myvar is: ", myvar)
 
 # root = client.get_root_node()
 # print(root)

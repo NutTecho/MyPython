@@ -96,8 +96,8 @@ def sockettest():
 
 if __name__=='__main__':
 	# pdtest1()
-	# select_table()
-	serialtest()
+	select_table()
+	# serialtest()
 	# testmqtt()
 	# publishmqtt()
 	# readexcel()

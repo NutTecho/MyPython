@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>http://localhost:4843</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="Int16">i=4</Alias>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+  </Aliases>
+  <UAObject NodeId="ns=1;i=58" BrowseName="1:MySensor" ParentNodeId="i=85">
+    <DisplayName>MySensor</DisplayName>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=4</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=10</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=4" BrowseName="1:Temp Sensor" ParentNodeId="ns=1;i=58" DataType="Int16" Historizing="true">
+    <DisplayName>Temp Sensor</DisplayName>
+    <Description>Temp Sensor</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=58</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int16>25</uax:Int16>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=10" BrowseName="1:Humid" ParentNodeId="ns=1;i=58" DataType="Float" Historizing="true">
+    <DisplayName>Humid</DisplayName>
+    <Description>Humid</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=58</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>10.5</uax:Float>
+    </Value>
+  </UAVariable>
+</UANodeSet>
