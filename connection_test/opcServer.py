@@ -50,13 +50,40 @@ def test_opc1():
 
 def test_opc2():
     server = Server()
-    uri = "opc.tcp://localhost:4843"
+    uri = "opc.tcp://172.29.48.1:4843"
     server.set_endpoint(uri)
-    server.import_xml("opc_conf.xml")
+    server.import_xml("opc_conf1.xml")
+    
+
+    objects = server.get_objects_node()
+    list_obj = objects.get_children()
+    myobj = list_obj[1].get_children()
+    print(myobj)
+
+  
+    myobj[0].set_writable()
+    myobj[1].set_writable()
+
+    # list_var = [item.set_writable() for item in myobj]
+    # print(list_var)
+
     server.start()
+
+    try:
+        while(True):
+
+            Humid = float(randint(10,50))
+            Temp = float(randint(200,999))
+
+            myobj[0].set_value(Humid)
+            myobj[1].set_value(Temp)
+
+            time.sleep(2)
+    finally:
+        pass
 
 
 
 if __name__ == "__main__":
-   test_opc1()
-#    test_opc2()
+#    test_opc1()
+   test_opc2()

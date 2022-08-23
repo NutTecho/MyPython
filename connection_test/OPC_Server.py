@@ -6,12 +6,15 @@ if __name__ == "__main__":
 
     # setup our server
     server = Server()
-    server.set_endpoint("opc.tcp://172.23.32.1:4841/freeopcua/server/")
+    uri = "opc.tcp://172.18.208.1:4843"
+    server.set_endpoint(uri)
 
     # setup our own namespace, not really necessary but should as spec
-    server.set_server_name("FreeOpcUa Example Server")
-    uri = "http://examples.freeopcua.github.io"
-    idx = server.register_namespace(uri)
+    # server.set_server_name("FreeOpcUa Example Server")
+    # url = "http://examples.freeopcua.github.io"
+    # idx = server.register_namespace(url)
+    name = "demo"
+    idx = server.register_namespace(name)
 
     # get Objects node, this is where we should put our nodes
     objects = server.get_objects_node()

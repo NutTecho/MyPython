@@ -1,6 +1,16 @@
-from pymodbus.client.sync import ModbusTcpClient
-# from pymodbus.client.sync import ModbusSerialClient
-# from pymodbus.server.sync import ModbusTcpServer
+from pymodbus.client.sync import (
+    ModbusSerialClient,
+    ModbusTcpClient,
+    ModbusTlsClient,
+    ModbusUdpClient,
+)
+from pymodbus.transaction import (
+    ModbusAsciiFramer,
+    ModbusBinaryFramer,
+    ModbusRtuFramer,
+    ModbusSocketFramer,
+    ModbusTlsFramer,
+)
 # from pymodbus.diag_message import * 
 # from pymodbus.file_message import *
 # from pymodbus.other_message import *
@@ -62,13 +72,13 @@ def WriteString(client,address,count,value):
 
 
 
-client = ModbusTcpClient(host='127.0.0.1',port=502)
+client = ModbusTcpClient(host='127.0.0.1',port=502,framer=ModbusSocketFramer)
 print(client.connect())
 # WriteData(client,1,123,5)
-# ReadData(client,1,8)
+# ReadData(client,0,8)
 # ReadCoil(client,0,8)
 # WriteCoil(client,0,8,"OFF")
-WriteString(client,0,8,"cat")
+WriteString(client,0,8,"banana")
 
 
 
