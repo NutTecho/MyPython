@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+# from tkinter import *
+
+
 def barv():
+    # plt.use( 'tkagg' )
     x = range(4)
     y = (20, 25, 40, 30)
     xticks = ("Mocca","latte","Espresso","tea")
@@ -72,7 +76,7 @@ def qc_plot():
 if __name__ == '__main__':
     # barv()
     # barh()
-    bar_sub()
-     #pie1()
-     # pie2()
-    # qc_plot()
+    # bar_sub()
+    # pie1()
+    # pie2()
+    qc_plot()

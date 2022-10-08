@@ -48,7 +48,7 @@ def insert_data(param):
 		with sqlite3.connect("E:/sql3/test.sqlite") as con:
 			sql_cmd = """insert into t1(id,name,age) values(?,?,?)"""
 			con.execute(sql_cmd,param)
-	except exception as e:
+	except Exception as e:
 		print('Error->{}'.format(e))
 
 def interface():

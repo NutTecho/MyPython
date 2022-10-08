@@ -81,10 +81,10 @@ import struct
 # ///////////////////////////////////////////////////
 def main():
     pymc3e = pymcprotocol.Type3E()
-    pymc3e.setaccessopt(commtype="binary")
-    pymc3e.connect("192.168.3.39", 2000)
-    cpu_type, cpu_code = pymc3e.read_cputype()
-    print(cpu_type,cpu_code)
+    pymc3e.setaccessopt(commtype="binary",timer_sec=10)
+    pymc3e.connect(ip="192.168.3.39",port=1026)
+    # cpu_type, cpu_code = pymc3e.read_cputype()
+    # print(cpu_type,cpu_code)
 
     def readsting(head,size):
         sumdata = ""
@@ -103,8 +103,8 @@ def main():
         return getdata
 
     a = readword("D100")
-    b =  readsting("D200",10)
-    print(a,b)
+    # b =  readsting("D200",10)
+    print(a)
 
 
 if __name__ == "__main__":

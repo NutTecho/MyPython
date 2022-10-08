@@ -74,7 +74,7 @@ print(f'a = {a1}')
 
 
 
-basic()
+# basic()
 # print(demo())
 # print(demo1())
 # print(demo2())

@@ -72,13 +72,13 @@ def WriteString(client,address,count,value):
 
 
 
-client = ModbusTcpClient(host='127.0.0.1',port=502,framer=ModbusSocketFramer)
+client = ModbusTcpClient(host='localhost',port=502,framer=ModbusSocketFramer)
 print(client.connect())
-# WriteData(client,1,123,5)
-# ReadData(client,0,8)
+# WriteData(client,0,2,555)
+ReadData(client,0,8)
 # ReadCoil(client,0,8)
-# WriteCoil(client,0,8,"OFF")
-WriteString(client,0,8,"banana")
+# WriteCoil(client,0,3,"ON")
+# WriteString(client,0,8,"banana")
 
 
 
