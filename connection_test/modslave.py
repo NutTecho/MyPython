@@ -36,28 +36,29 @@ from pymodbus.transaction import (
 # client.close()
 # print(a)
 
+client = ModbusTcpClient(host='127.0.0.1',port=502,framer=ModbusSocketFramer)
 
-def WriteData(client,address,count,value):
-    client.write_registers(address,[value]*count,unit=1)
+def WriteData(slave_id,address,count,value):
+    client.write_registers(address,[value]*count,unit = slave_id)
 
-def ReadData(client,address,count):
-    x = client.read_holding_registers(address,count,unit = 1)
+def ReadData(slave_id,address,count):
+    x = client.read_holding_registers(address,count,unit = slave_id)
     print(x.registers)
 
-def ReadCoil(client,address,count):
-    x = client.read_coils(address,count,unit=1).bits
+def ReadCoil(slave_id,address,count):
+    x = client.read_coils(address,count,unit=slave_id).bits
     print(x)
 
-def WriteCoil(client,address,count,value):
+def WriteCoil(slave_id,address,count,value):
     if value == "ON":
         status = True
     else:
         status = False
-    x = client.write_coils(address,[status]*count,unit=1)
+    x = client.write_coils(address,[status]*count,unit = slave_id)
     # print(x)
 
-def WriteString(client,address,count,value):
-    client.write_registers(address,[0]*count,unit=1)
+def WriteString(slave_id,address,count,value):
+    client.write_registers(address,[0]*count,unit=slave_id)
     if len(value)%2 > 0:
         value = value + " "
     c = len(value)//2
@@ -67,17 +68,15 @@ def WriteString(client,address,count,value):
         q = [ hex(ord(r))[2:4] for r in y]
         print(q)
         k = int(q[0]+q[1],16)
-        client.write_registers(address+i,k,unit=1)
+        client.write_registers(address+i,k,unit=slave_id)
 
 
 
-
-client = ModbusTcpClient(host='localhost',port=502,framer=ModbusSocketFramer)
 print(client.connect())
-# WriteData(client,0,2,555)
-ReadData(client,0,8)
-# ReadCoil(client,0,8)
-# WriteCoil(client,0,3,"ON")
+# WriteData(2,0,2,555)
+# ReadData(3,0,8)
+# ReadCoil(1,0,8)
+WriteCoil(3,0,3,"ON")
 # WriteString(client,0,8,"banana")
 
 

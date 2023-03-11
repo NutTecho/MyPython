@@ -1,0 +1,55 @@
+===== check version =======
+openssl version -a
+
+===== add verify data ======
+-verify
+
+===== generate private key ======
+openssl genrsa 2048 > host.key
+
+===== encrypt data to file =======
+===== remember pase phrase =======
+openssl rsa -des3 -in host.key -out host_enc.key
+
+===== decrypt data to file =======
+openssl rsa -in host_enc.key -out host.key
+
+================================================================
+================================================================
+
+===== after generate private keu convert to CSR=====
+===== Certificate Signing Requests=======
+
+==== case 1 with out crt data will ask address , email ======
+openssl req -new -key host.key -out request.csr
+
+===== case 2 have crt data ==========
+openssl x509 -signkey host.key -in host.crt  -x509toreq -out request.csr
+
+===== CSR entry =======
+openssl req -text -noout -verify -in request.csr
+
+
+=======================================================================
+=======================================================================
+
+
+====== after generate key convert to CRT =======
+===== CRT need expire date ========
+====== .crt = .key + .csr ========
+
+chmod 400 host.key
+
+==== case 1 with out csr data will ask address , email ======
+openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.crt
+
+===== case 2 have csr data ==========
+openssl x509 -signkey host.key -in request.csr -req -days 365 -out host.crt
+
+===== CRT entry =======
+openssl x509 -text -noout -in host.crt
+
+
+
+==== convert .key .crt to .pem ========
+openssl x509 -in host.crt -out host.pem -outform PEM
